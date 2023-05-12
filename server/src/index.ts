@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 const app = express();
 const mongoose = require('mongoose');
 
-import {config} from 'dotenv'
+import {config} from 'dotenv';
 config();
 
 const PORT = 5000;
