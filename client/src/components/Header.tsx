@@ -2,32 +2,31 @@ import React from "react";
 import Logo from "../assets/images/Logo.png";
 
 const Header: React.FC = () => {
+
   return (
-    <nav className="bg-slate-100 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
+    <nav className="bg-slate-100 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600 font-poppins">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="https://flowbite.com/" className="flex items-center">
           <img src={Logo} className="h-8 mr-3" alt="Flowbite Logo" />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-[#284184]">
+          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-[#284184] ">
             Refer
           </span>
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-amber-500">
+          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-amber-500 ">
             do
           </span>
         </a>
-        <div className="flex ">
+        <div className="flex">
           <div className="flex md:order-2 pl-10">
             <button
               type="button"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-amber-500 dark:hover:bg-amber-400 "
+              className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-amber-500 dark:hover:bg-amber-400 "
             >
               Subscribe
             </button>
-            <button
-              type="button"
-              className="ml-3 text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:border-gray-600 dark:text-blue-800 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"
-            >
-              Login
-            </button>
+            <label htmlFor="my-modal-3" className="bg-slate-100 btn-base ml-3 text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:border-gray-600 dark:text-blue-800 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+            Login
+            </label>
+           
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"
@@ -52,10 +51,10 @@ const Header: React.FC = () => {
             </button>
           </div>
           <div
-            className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 bg-slate-100"
             id="navbar-sticky"
           >
-            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-white md:dark:bg- dark:border-gray-700">
+            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:border-0  dark:border-gray-700">
               <li>
                 <a
                   href="#"
