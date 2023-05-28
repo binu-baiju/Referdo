@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        custom: ["CustomFont", "CircularStd-Black"],
+        'poppins': ['Poppins', 'sans-serif'],
       },
 
       colors: {
@@ -12,5 +12,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };
