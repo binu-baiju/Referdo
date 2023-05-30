@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Form from "./pages/form";
 
 import Login from "./pages/login";
+import EditProfile from "./components/EditProfile";
 
 export default function App() {
   return (
@@ -15,7 +16,7 @@ export default function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route  path="/login/*" element={<Login />} />
         <Route  path="/form/*" element={<Form />} />
-
+        <Route  path="/dashboard/editprofile" element={<EditProfile />} />
       </Routes>
     </Router>
   );

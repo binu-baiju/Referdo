@@ -1,0 +1,48 @@
+
+
+.file-input-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .file-input-label input[type="file"] {
+    display: none;
+  }
+  
+  .file-input-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+   
+  }
+  
+  .file-input-icon {
+    position: absolute;
+    /* right: 100px;
+    bottom: 270px; */
+   
+    border-radius:50%;
+    /* bottom: 5px;
+    right: 5px; */
+    width: 32px;
+    height: 32px;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  }
+  
+  .file-input-text {
+    font-size: 14px;
+    color: #888;
+    text-align: center;
+  }
+  

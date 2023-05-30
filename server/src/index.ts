@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import { config } from "dotenv";
 const cors = require("cors");
 import authRoutes from "./routes/authRoutes";
+import dashboardRoutes from "./routes/dashboardroutes";
+
 
 config();
 
@@ -13,6 +15,10 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api", authRoutes);
+app.use("/api", dashboardRoutes);
+
+
+
 
 app.get("/", (req, res) => {
   res.send("Hello");

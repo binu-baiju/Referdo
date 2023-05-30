@@ -19,9 +19,13 @@ export const registerOrLogin = async (req: Request, res: Response) => {
     if (!user) {
       // No user, registration will be done
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
+      const name = req.body.email.split('@')[0];
+       
+    
       await User.create({
         email: req.body.email,
         password: hashedPassword,
+        name:name
       });
       return res.json({ message: "Registration Successful", token: token });
     } else {
@@ -30,26 +34,30 @@ export const registerOrLogin = async (req: Request, res: Response) => {
       if (isPasswordValid) {
         return res.json({ message: "Login Successful", token: token });
       } else {
+        console.log(isPasswordValid);
+        
         return res.status(401).json({ status: "error", error: "Incorrect password" });
       }
     }
   } catch (error) {
+    
+
     res.json({ status: "error", error: "Authentication error occurred" });
   }
 };
 
-export const dashboard = async (req: Request, res: Response) => {
-  const token = req.header("x-access-token");
-  try {
-    const decoded: any = jwt.verify(token!, process.env.SECRET_KEY!);
-    const email = decoded.email;
-    const user = await User.findOne({ email: email });
-    if (user) {
-      const name = user.email.split("@")[0];
-      res.json({ message: "Authenticated email found", name: name, status: "ok" });
-    }
-  } catch (error) {
-    console.log(error);
-    res.json({ status: "error", error: "Invalid token" });
-  }
-};
+// export const dashboard = async (req: Request, res: Response) => {
+//   const token = req.header("x-access-token");
+//   try {
+//     const decoded: any = jwt.verify(token!, process.env.SECRET_KEY!);
+//     const email = decoded.email;
+//     const user = await User.findOne({ email: email });
+//     if (user) {
+//       const name = user.email.split("@")[0];
+//       res.json({ message: "Authenticated email found", name: name, status: "ok" });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     res.json({ status: "error", error: "Invalid token" });
+//   }
+// };

@@ -1,5 +1,7 @@
 import express, { Router } from "express";
-import { registerOrLogin, dashboard } from "../controllers/authControllers";
+import { registerOrLogin } from "../controllers/authControllers";
+import {dashboard} from "../controllers/dashboardController"
+import { authenticateToken } from "../middlewares/middleware";
 
 const router: Router = express.Router();
 
@@ -7,6 +9,6 @@ const router: Router = express.Router();
 router.post("/registerOrLogin", registerOrLogin);
 
 // Dashboard route
-router.get("/dashboard", dashboard);
+// router.get("/dashboard",authenticateToken, dashboard);
 
 export default router;
