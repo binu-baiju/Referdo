@@ -1,4 +1,15 @@
-import mongoose from "mongoose";
+import mongoose, { PopulatedDoc, Schema,Document } from "mongoose";
+import { IDev } from "./devmodel";
+
+export interface IUser extends Document {
+  email: string;
+  password: string;
+  name?: string;
+  profession?: string;
+  devs: string[];
+  // Schema.Types.ObjectId[];
+  // PopulatedDoc<IDev>[];
+}
 
 const User = new mongoose.Schema(
   {

@@ -3,7 +3,7 @@ import "./EditProfile.css";
 import editimage from "../assets/images/ic_round-restaurant-menu.png";
 import jwtDecode from "jwt-decode";
 type editProfileProps = {
-  dashboardVerify:() => void
+  dashboardVerify?:() => void
 }
 const EditProfile = ({dashboardVerify}:editProfileProps) => {
   const [name, setName] = useState("");
@@ -11,7 +11,9 @@ const EditProfile = ({dashboardVerify}:editProfileProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
 
-  const handlEditProfile = async () => {
+  const handlEditProfile = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     setIsLoading(true);
 
     try {
@@ -31,7 +33,9 @@ const EditProfile = ({dashboardVerify}:editProfileProps) => {
       if (response.ok) {
         // Profile updated successfully
         setIsUpdated(true);
+        if (dashboardVerify) {
         dashboardVerify();
+        }
       } else {
         // Error updating profile
         console.error("Error updating profile");
@@ -130,11 +134,11 @@ const EditProfile = ({dashboardVerify}:editProfileProps) => {
                   <option value="" disabled selected>
                     Pick your profession
                   </option>
-                  <option value="abc">abc</option>
-                  <option value="def">def</option>
-                  <option value="git">git</option>
-                  <option value="htf">htf</option>
-                  <option value="wefw">wefw</option>
+                  <option value="abc">Full Stack Developer</option>
+                  <option value="def">React Developer</option>
+                  <option value="git">Nodejs Developer</option>
+                  <option value="htf">Python Developer</option>
+                  <option value="wefw">PHP DEveloper</option>
                 </select>
               </div>
               <label className="label">

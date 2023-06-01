@@ -5,6 +5,11 @@ const cors = require("cors");
 import authRoutes from "./routes/authRoutes";
 import dashboardRoutes from "./routes/dashboardroutes";
 
+// const option = {
+//   socketTimeoutMS: 30000,
+//   keepAlive: true,
+//   reconnectTries: 30000
+// };
 
 config();
 
