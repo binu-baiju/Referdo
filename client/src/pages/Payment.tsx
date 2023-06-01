@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from "../assets/images/Logo.png";
 
-const Header1: React.FC = () => {
+const Payment: React.FC = () => {
   return (
     <nav className="bg-slate-100 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -52,4 +52,4 @@ const Header1: React.FC = () => {
   );
 };
 
-export default Header1;
+export default Payment;

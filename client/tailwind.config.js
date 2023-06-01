@@ -9,6 +9,7 @@ export default {
 
       colors: {
         "custom-yellow": "#BAA333",
+        customPurple: '#9584DD'
       },
     },
   },
