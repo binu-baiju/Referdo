@@ -28,6 +28,8 @@ const Login: React.FC = () => {
       localStorage.setItem('token',data.token)
       alert("Login Successful")
       window.location.href = '/dashboard'
+      console.log(data.token);
+      
     }
     else {
       alert('Please check your username and password')
