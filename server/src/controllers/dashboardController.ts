@@ -97,9 +97,13 @@ export const addDevs = async (req:AuthenticatedRequest,res:Response) =>{
           name: req.body.name,
           email: req.body.email,
           profession: req.body.profession,
+          phonenumber: req.body.phonenumber,
+          twitterurl: req.body.twitterurl,
+          githuburl: req.body.githuburl,
+          linkedinurl: req.body.linkedinurl,
           user: user._id, // Associate the dev with the user
         });
-        // console.log(newDev);
+        console.log(newDev);
         
         // Save the newDev document
     await newDev.save();

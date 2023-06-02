@@ -6,6 +6,7 @@ import jwtDecode from "jwt-decode";
 import EditProfile from "../components/EditProfile";
 import Header1 from "../components/Header1";
 import "./Dashboard.css";
+import Card from "./Card";
 
 type User = {
   name: string;
@@ -20,6 +21,10 @@ type Dev = {
   user: string;
   _id: string;
   profession: string;
+  phonenumber: string;
+  twitterurl: string;
+  githuburl: string;
+  linkedinurl: string;
 };
 const Dashboard: React.FC = () => {
   const [user, setUser] = useState<User>({
@@ -37,8 +42,14 @@ const Dashboard: React.FC = () => {
       user: "",
       _id: "",
       profession: "",
+      phonenumber: "",
+      twitterurl: "",
+      githuburl: "",
+      linkedinurl:""
     },
   ]);
+
+  const [selectedDev, setSelectedDev] = useState<Dev | null>(null);
 
   async function dashboardVerify() {
     const headers = new Headers();
@@ -106,12 +117,21 @@ const Dashboard: React.FC = () => {
           .then((response) => response.json())
           .then((data) => {
             alert(data.message);
+            displayDevs();
           });
       } catch (err) {
         console.error("Error deleting from frontend", err);
       }
     }
   }
+
+  const handleSelectedDev = (dev: Dev) => {
+    setSelectedDev(dev);
+  };
+
+  const closeModal = () => {
+    setSelectedDev(null);
+  };
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -167,17 +187,17 @@ const Dashboard: React.FC = () => {
           <div className="bg-customPurple w-4/5 flex flex-col justify-center items-center gap-3">
             <div className="text-slate-200    w-full flex justify-start lg:pl-14 md:pl-7">
               <label className="bg-customPurple ">
-              <h3 className="border-b-2 border-white">Refered Devs</h3>
-             
-
+                <h3 className="border-b-2 border-white">Refered Devs</h3>
               </label>
-              
             </div>
 
             <div className="w-11/12 h-2/4 bg-blue-900 rounded-lg shadow-md   flex flex-col justify-start items-center">
               {devs.map((dev) => {
                 return (
-                  <div className="w-11/12 h-12 bg-violet-400 rounded-lg my-3 mt-5">
+                  <div key={dev._id} className="w-11/12 h-12 bg-violet-400 rounded-lg my-3 mt-5">
+                    <Card dev={selectedDev} onClose={closeModal} />
+                    {/* name={dev.name} profession={dev.profession} email={dev.email} phonenumber={dev.phonenumber} twitterurl={dev.twitterurl} githuburl={dev.githuburl} linkedinurl={dev.twitterurl} */}
+
                     <div className="flex flex-row  justify-between items-center  px-3 ">
                       <div className="flex items-center gap-2">
                         <div className="flex items-center   mb-1">
@@ -223,12 +243,19 @@ const Dashboard: React.FC = () => {
                         </div>
 
                         <div>
-                          <button
-                            type="button"
-                            className=" h-7 bg-yellow-400  text-[10px] text-blue-900"
+                          <label
+                            htmlFor="my-modal-4" onClick={()=>handleSelectedDev(dev)}
+                            className="btn btn-sm text-xs  bg-yellow-400 hover:bg-yellow-300   text-blue-900"
                           >
                             Show
-                          </button>
+                          </label>
+                          {/* <button
+                            type="button"
+                            
+                            className=" h-7 bg-yellow-400   text-[10px] text-blue-900"
+                          >
+                            Show
+                          </button> */}
                         </div>
                       </div>
                     </div>

@@ -4,6 +4,11 @@ const Sampleform: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [profession, setProfession] = useState('');
+  const [phonenumber, setPhonenumber] = useState('');
+  const [twitterurl, setTwitterUrl] = useState('');
+  const [githuburl, setGithubUrl] = useState('');
+  const [linkedinurl, setLinkedinUrl] = useState('');
+
 
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -17,7 +22,7 @@ const Sampleform: React.FC = () => {
       const response = await fetch('http://localhost:5000/api/dashboard/adddevs', {
         method: 'POST',
         headers: headers,
-        body: JSON.stringify({ name, email,profession }),
+        body: JSON.stringify({ name, email,profession,phonenumber,twitterurl,githuburl,linkedinurl }),
       });
 
       if (response.ok) {
@@ -27,6 +32,14 @@ const Sampleform: React.FC = () => {
         setName('');
         setEmail('');
         setProfession('');
+        setPhonenumber('');
+        setTwitterUrl('');
+        setGithubUrl('');
+        setLinkedinUrl('');
+
+
+
+
 
       } else {
         // Error adding dev
@@ -51,6 +64,22 @@ const Sampleform: React.FC = () => {
   <div>
     <label className='text-base-300'>Profession:</label>
     <input type="text" value={profession} onChange={(e) => setProfession(e.target.value)} />
+  </div>
+  <div>
+    <label className='text-base-300'>Phonenumber:</label>
+    <input type="tel" value={phonenumber} onChange={(e) => setPhonenumber(e.target.value)} />
+  </div>
+  <div>
+    <label className='text-base-300'>Twitter link:</label>
+    <input type="url" value={twitterurl} onChange={(e) => setTwitterUrl(e.target.value)} />
+  </div>
+  <div>
+    <label className='text-base-300'>Githublink link:</label>
+    <input type="url" value={githuburl} onChange={(e) => setGithubUrl(e.target.value)} />
+  </div>
+  <div>
+    <label className='text-base-300'>Linkindin link:</label>
+    <input type="url" value={linkedinurl} onChange={(e) => setLinkedinUrl(e.target.value)} />
   </div>
   <button type="submit">Add Dev</button>
 </form>
