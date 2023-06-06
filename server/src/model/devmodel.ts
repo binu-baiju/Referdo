@@ -6,7 +6,9 @@ export interface IDev extends Document {
   email: string;
   image?: string;
   profession: string;
+  description: string;
   phonenumber: string;
+  resume: string;
   twitterurl: string;
   githuburl: string;
   linkedinurl: string;
@@ -21,7 +23,9 @@ const devSchema = new mongoose.Schema({
   email: { type: String, required: true,unique: true },
   image: { type: String },
   profession: { type: String, required: true },
+  description: [{ type: String, required: true }],
   phonenumber: { type: String, required: true },
+  resume: { type: String, required: true },
   twitterurl: { type: String, required: true },
   githuburl: { type: String, required: true },
   linkedinurl: { type: String, required: true },

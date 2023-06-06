@@ -5,6 +5,7 @@ import Home from "./pages/home";
 import Dashboard from "./pages/Dashboard";
 import Form from "./pages/form";
 
+
 import Login from "./pages/login";
 
 
@@ -21,7 +22,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route  path="/login/*" element={<Login />} />
-        <Route  path="/form/*" element={<Form />} />
+        <Route  path="/form/user/:userId/dev" element={<Form />} />
         {/* <Route  path="/dashboard/cardmodal" element={<Card/>} /> */}
         <Route  path="/dashboard/editprofile" element={<EditProfile />} />
         <Route  path="/sampleform" element={<Sampleform />} />

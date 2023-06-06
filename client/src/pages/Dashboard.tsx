@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ClipboardJS from 'clipboard'
 // import jwt from 'jsonwebtoken'
 import Logo from "../assets/images/Logo.png";
 import jwtDecode from "jwt-decode";
@@ -21,6 +22,7 @@ type Dev = {
   user: string;
   _id: string;
   profession: string;
+  description: string;
   phonenumber: string;
   twitterurl: string;
   githuburl: string;
@@ -42,10 +44,11 @@ const Dashboard: React.FC = () => {
       user: "",
       _id: "",
       profession: "",
+      description: "",
       phonenumber: "",
       twitterurl: "",
       githuburl: "",
-      linkedinurl:""
+      linkedinurl: "",
     },
   ]);
 
@@ -86,6 +89,8 @@ const Dashboard: React.FC = () => {
       );
       const data = await req.json();
       if (data.status === "ok") {
+        
+        
         setDevs(data.devs);
         // setProfession(data.profession)
       } else {
@@ -132,6 +137,26 @@ const Dashboard: React.FC = () => {
   const closeModal = () => {
     setSelectedDev(null);
   };
+
+  
+  const handleCopyurl=(userId:string)=>{
+    
+    const url = `http://localhost:5173/form/user/${userId}/dev`;
+    
+
+    navigator.clipboard.writeText(url)
+    .then(() => {
+      alert('URL copied to clipboard');
+    })
+    .catch((error) => {
+      console.error('Failed to copy URL', error);
+    });
+
+    
+
+
+    
+  }
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -194,7 +219,10 @@ const Dashboard: React.FC = () => {
             <div className="w-11/12 h-2/4 bg-blue-900 rounded-lg shadow-md   flex flex-col justify-start items-center">
               {devs.map((dev) => {
                 return (
-                  <div key={dev._id} className="w-11/12 h-12 bg-violet-400 rounded-lg my-3 mt-5">
+                  <div
+                    key={dev._id}
+                    className="w-11/12 h-12 bg-violet-400 rounded-lg my-3 mt-3"
+                  >
                     <Card dev={selectedDev} onClose={closeModal} />
                     {/* name={dev.name} profession={dev.profession} email={dev.email} phonenumber={dev.phonenumber} twitterurl={dev.twitterurl} githuburl={dev.githuburl} linkedinurl={dev.twitterurl} */}
 
@@ -244,7 +272,8 @@ const Dashboard: React.FC = () => {
 
                         <div>
                           <label
-                            htmlFor="my-modal-4" onClick={()=>handleSelectedDev(dev)}
+                            htmlFor="my-modal-4"
+                            onClick={() => handleSelectedDev(dev)}
                             className="btn btn-sm text-xs  bg-yellow-400 hover:bg-yellow-300   text-blue-900"
                           >
                             Show
@@ -267,7 +296,7 @@ const Dashboard: React.FC = () => {
               <div>
                 <button
                   type="button"
-                  className=" h-9 bg-yellow-400  text-[14px] text-blue-900 w-24"
+                  className="copy-button h-9 bg-yellow-400  text-[14px] text-blue-900 w-24"
                 >
                   Show All
                 </button>
@@ -286,6 +315,7 @@ const Dashboard: React.FC = () => {
             <div className="w-full">
               <button
                 type="button"
+                onClick={()=>{handleCopyurl(user._id)}}
                 className="bg-slate-200 text-blue-90 text-blue-900 hover:bg-slate-200 focus:ring-4  font-medium rounded-lg text-sm  text-center   py-0 h-8 w-1/2"
               >
                 Create a Public Link

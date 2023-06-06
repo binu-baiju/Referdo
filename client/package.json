@@ -12,6 +12,8 @@
   "dependencies": {
     "@leecheuk/react-google-login": "^5.4.1",
     "@react-oauth/google": "^0.11.0",
+    "@types/clipboard": "^2.0.7",
+    "clipboard": "^2.0.11",
     "daisyui": "^2.51.6",
     "install": "^0.13.0",
     "jsonwebtoken": "^9.0.0",

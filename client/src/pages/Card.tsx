@@ -7,6 +7,7 @@ type Dev = {
   user: string;
   _id: string;
   profession: string;
+  description: string;
   phonenumber: string;
   twitterurl: string;
   githuburl: string;
@@ -26,7 +27,26 @@ interface CardProps {
   onClose:() => void;
 }
 
+const handleCopyemail=(data:string)=>{
+    
+  // const url = `https://dashboard/user/${userId}`;
+  
 
+  navigator.clipboard.writeText(data)
+  .then(() => {
+    if (data.includes('@')) {
+    alert('Email copied to clipboard');
+
+    }
+    else {
+      alert('Phonenumber copied to clipboard');
+
+    }
+  })
+  .catch((error) => {
+    console.error('Failed to copy URL', error);
+  });
+}
 
 const Card: React.FC<CardProps> = ({ dev}) => {
   // name ,profession,email,phonenumber,twitterurl,githuburl,linkedinurl
@@ -36,7 +56,7 @@ const Card: React.FC<CardProps> = ({ dev}) => {
       <>
         <input type="checkbox" id="my-modal-4" className="modal-toggle" />
         <label htmlFor="my-modal-4" className="modal cursor-pointer">
-          <div className="max-w-sm h-2/3  rounded-2xl overflow-hidden shadow-lg bg-white font-poppins">
+          <div className="max-w-sm h-2/3 w-2/3 rounded-2xl overflow-hidden shadow-lg bg-white font-poppins">
             <div className="flex flex-col gap-2 ">
                 <div className="flex flex-col gap-0">
                 <div className=" flex justify-end items-center h-12">
@@ -63,12 +83,10 @@ const Card: React.FC<CardProps> = ({ dev}) => {
                     
                     
                   </p>
-                  <div className="flex flex-col ">
-                    <div className="flex justify-center ">
-                      <p className="text-[12px] dark:text-[#284184] w-3/4">
-                        A kiddo who uses Tailwind CSS and Laravel in web
-                        development. Currently playing around with design via
-                        Figma
+                  <div className="flex flex-col  h-16">
+                    <div className="flex justify-center  ">
+                      <p className="text-[12px] dark:text-[#284184] w-3/4 ">
+                        {dev?.description}
                       </p>
                     </div>
                   </div>
@@ -76,16 +94,16 @@ const Card: React.FC<CardProps> = ({ dev}) => {
 
                 <div className="flex flex-col gap-2">
                   <div className="flex flex-col gap-3 w-full items-center">
-                    <button className="btn btn-xs  w-1/2 bg-violet-400 hover:bg-violet-500 border-none text-slate-100 " style={{ textTransform: 'lowercase' }}>{dev?.email}</button>
-                    <button className="btn btn-xs  w-1/2 bg-violet-400 hover:bg-violet-500 border-none text-slate-100">{dev?.phonenumber}</button>
-                    <button className="btn btn-xs  w-1/2 bg-violet-400 hover:bg-violet-500 border-none text-slate-100">Button</button>
+                    <button className="btn btn-xs  w-1/2 bg-violet-400 hover:bg-violet-500 border-none text-slate-100 " onClick={()=>handleCopyemail(dev?.email ?? '')} style={{ textTransform: 'lowercase' } }>{dev?.email}</button>
+                    <button className="btn btn-xs  w-1/2 bg-violet-400 hover:bg-violet-500 border-none text-slate-100" onClick={()=>handleCopyemail(dev?.phonenumber ?? '')}>{dev?.phonenumber}</button>
+                    <button className="btn btn-xs  w-1/2 bg-violet-400 hover:bg-violet-500 border-none text-slate-100">Resume</button>
                     
 
                     
                    
                   </div>
 
-                  <div className="flex justify-center gap-10 items-center pr-3  ">
+                  <div className="flex justify-center gap-10 items-end pr-3  h-12   ">
                   <a
                       href={dev?.twitterurl}
                       target="_blank"
@@ -121,9 +139,7 @@ const Card: React.FC<CardProps> = ({ dev}) => {
                       href={dev?.linkedinurl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-18"
-                      
-                    >
+                      className="w-18">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-7 w-7 fill-amber-500"

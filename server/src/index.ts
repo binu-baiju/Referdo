@@ -4,6 +4,7 @@ import { config } from "dotenv";
 const cors = require("cors");
 import authRoutes from "./routes/authRoutes";
 import dashboardRoutes from "./routes/dashboardroutes";
+import formRoutes from "./routes/formRoutes";
 
 // const option = {
 //   socketTimeoutMS: 30000,
@@ -21,6 +22,8 @@ app.use(express.json());
 
 app.use("/api", authRoutes);
 app.use("/api", dashboardRoutes);
+app.use("/api", formRoutes);
+
 
 
 
