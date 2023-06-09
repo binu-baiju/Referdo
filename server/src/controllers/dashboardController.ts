@@ -18,7 +18,7 @@ export const dashboard = async (req: AuthenticatedRequest, res: Response) => {
     }
 
     const user = await User.findOne({ email });
-    console.log(user);
+    // console.log(user);
 
     if (user) {
       res.json({ message: "User found", user, status: "ok" });
@@ -141,7 +141,7 @@ export const getSomeDevs = async (req: AuthenticatedRequest, res: Response) => {
     }
 
     const user: IUser | null = await User.findOne({ email });
-    console.log(user);
+    // console.log(user);
 
     if (user) {
       //  res.json({ message: 'User found', user, status: 'ok' });
@@ -172,7 +172,7 @@ export const deleteDev = async (req: AuthenticatedRequest, res: Response) => {
         .json({ status: "error", error: "User email is missing" });
     }
     const user: IUser | null = await User.findOne({ email });
-    console.log(user);
+    // console.log(user);
 
     if (user) {
       // Check if the dev exists in the user's devs array
@@ -195,6 +195,39 @@ export const deleteDev = async (req: AuthenticatedRequest, res: Response) => {
     res.json({ status: "ok", message: "Dev deleted successfully" });
   } catch (error) {
     console.log("Error deleting dev:", error);
+    res.status(500).json({ status: "error", error: "Internal server error" });
+  }
+};
+
+export const getDevs = async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const email = req.user?.email;
+
+    if (!email) {
+      return res
+        .status(401)
+        .json({ status: "error", error: "User email is missing" });
+    }
+
+    const user: IUser | null = await User.findOne({ email });
+    console.log(user);
+
+    if (user) {
+      //  res.json({ message: 'User found', user, status: 'ok' });
+      // Populate the 'devs' field with the corresponding Dev documents and limit the results to the first three
+      //  const populatedUser: Document<any, any> | null =
+      // Get the first three dev ids from the user object
+      const devIds: string[] = user.devs;
+      const skip = req.query.skip ? Number(req.query.skip) : 0;
+      const DEFAULT_LIMIT = 7;
+
+      const devs: IDev[] = await Devmodel.find({ _id: { $in: devIds } }).skip(skip).limit(DEFAULT_LIMIT);
+      res.json({ message: "Devs retrieved", devs, status: "ok" });
+    } else {
+      res.status(404).json({ status: "error", error: "User not found" });
+    }
+  } catch (error) {
+    console.log(error);
     res.status(500).json({ status: "error", error: "Internal server error" });
   }
 };

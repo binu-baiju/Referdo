@@ -54,9 +54,9 @@ const Card: React.FC<CardProps> = ({ dev}) => {
     <>
     
       <>
-        <input type="checkbox" id="my-modal-4" className="modal-toggle" />
-        <label htmlFor="my-modal-4" className="modal cursor-pointer">
-          <div className="max-w-sm h-2/3 w-2/3 rounded-2xl overflow-hidden shadow-lg bg-white font-poppins">
+        <input type="checkbox" id="my-modal-1" className="modal-toggle" />
+        <label htmlFor="my-modal-1" className="modal cursor-pointer">
+          <div className="max-w-sm  w-2/3 rounded-2xl overflow-hidden shadow-lg bg-white font-poppins">
             <div className="flex flex-col gap-2 ">
                 <div className="flex flex-col gap-0">
                 <div className=" flex justify-end items-center h-12">
@@ -103,7 +103,7 @@ const Card: React.FC<CardProps> = ({ dev}) => {
                    
                   </div>
 
-                  <div className="flex justify-center gap-10 items-end pr-3  h-12   ">
+                  <div className="flex justify-center gap-10 items-center pr-3  h-12   ">
                   <a
                       href={dev?.twitterurl}
                       target="_blank"

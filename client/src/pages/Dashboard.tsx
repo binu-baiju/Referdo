@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ClipboardJS from 'clipboard'
+import ClipboardJS from "clipboard";
 // import jwt from 'jsonwebtoken'
 import Logo from "../assets/images/Logo.png";
 import jwtDecode from "jwt-decode";
 import EditProfile from "../components/EditProfile";
+import ShowAllDev from "../components/ShowAllDev";
+
+
+
 import Header1 from "../components/Header1";
 import "./Dashboard.css";
 import Card from "./Card";
 
-type User = {
+export type User = {
   name: string;
   email: string;
   _id: string;
   profession: string;
   devs: Array<string>;
 };
-type Dev = {
+export type Dev = {
   email: string;
   name: string;
   user: string;
@@ -54,6 +58,13 @@ const Dashboard: React.FC = () => {
 
   const [selectedDev, setSelectedDev] = useState<Dev | null>(null);
 
+  const [refreshModal, setRefreshModal] = useState(false);
+
+  // Function to handle refreshing the modal
+  const handleRefreshModal = () => {
+    setRefreshModal(true);
+  };
+
   async function dashboardVerify() {
     const headers = new Headers();
     headers.append("x-access-token", localStorage.getItem("token") || "");
@@ -89,8 +100,6 @@ const Dashboard: React.FC = () => {
       );
       const data = await req.json();
       if (data.status === "ok") {
-        
-        
         setDevs(data.devs);
         // setProfession(data.profession)
       } else {
@@ -123,6 +132,8 @@ const Dashboard: React.FC = () => {
           .then((data) => {
             alert(data.message);
             displayDevs();
+            
+            handleRefreshModal();
           });
       } catch (err) {
         console.error("Error deleting from frontend", err);
@@ -130,33 +141,29 @@ const Dashboard: React.FC = () => {
     }
   }
 
-  const handleSelectedDev = (dev: Dev) => {
+   const handleSelectedDev = (dev: Dev) => {
     setSelectedDev(dev);
   };
 
   const closeModal = () => {
     setSelectedDev(null);
+    displayDevs();
   };
 
   
-  const handleCopyurl=(userId:string)=>{
-    
+
+  const handleCopyurl = (userId: string) => {
     const url = `http://localhost:5173/form/user/${userId}/dev`;
-    
 
-    navigator.clipboard.writeText(url)
-    .then(() => {
-      alert('URL copied to clipboard');
-    })
-    .catch((error) => {
-      console.error('Failed to copy URL', error);
-    });
-
-    
-
-
-    
-  }
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        alert("URL copied to clipboard");
+      })
+      .catch((error) => {
+        console.error("Failed to copy URL", error);
+      });
+  };
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -222,7 +229,7 @@ const Dashboard: React.FC = () => {
                   <div
                     key={dev._id}
                     className="w-11/12 h-12 bg-violet-400 rounded-lg my-3 mt-3"
-                  >
+                   >
                     <Card dev={selectedDev} onClose={closeModal} />
                     {/* name={dev.name} profession={dev.profession} email={dev.email} phonenumber={dev.phonenumber} twitterurl={dev.twitterurl} githuburl={dev.githuburl} linkedinurl={dev.twitterurl} */}
 
@@ -292,20 +299,27 @@ const Dashboard: React.FC = () => {
                 );
               })}
             </div>
-            <div className="flex justify-end w-full md:px-7 lg:px-14 gap-2">
-              <div>
-                <button
-                  type="button"
-                  className="copy-button h-9 bg-yellow-400  text-[14px] text-blue-900 w-24"
+
+            <div className="flex justify-end w-full md:px-7 lg:px-14 gap-2 ">
+              {/* <ShowAllDev dashboardVerify={dashboardVerify} deleteDev={deleteDev} refreshModal={refreshModal} setRefreshModal={setRefreshModal}/> */}
+              <ShowAllDev  deleteDev={deleteDev} refreshModal={refreshModal} setRefreshModal={setRefreshModal} handleRefreshModal = {handleRefreshModal}/>
+              {/* <ShowAllDev2  deleteDev={deleteDev} refreshModal={refreshModal} setRefreshModal={setRefreshModal}/> */}
+
+              <div className="">
+                <label
+                  htmlFor="my-modal"
+                  className="btn btn-sm h-full   bg-yellow-400  text-[14px] text-blue-900 w-28 "
+                  style={{ textTransform: "none", border: "none" }}
                 >
                   Show All
-                </button>
+                </label>
               </div>
+              <div></div>
 
-              <div>
+              <div className="flex">
                 <button
                   type="button"
-                  className=" h-9 bg-yellow-400  text-[14px] text-blue-900 w-24"
+                  className="  bg-yellow-400  text-[14px] text-blue-900 w-24"
                 >
                   Share
                 </button>
@@ -315,7 +329,9 @@ const Dashboard: React.FC = () => {
             <div className="w-full">
               <button
                 type="button"
-                onClick={()=>{handleCopyurl(user._id)}}
+                onClick={() => {
+                  handleCopyurl(user._id);
+                }}
                 className="bg-slate-200 text-blue-90 text-blue-900 hover:bg-slate-200 focus:ring-4  font-medium rounded-lg text-sm  text-center   py-0 h-8 w-1/2"
               >
                 Create a Public Link

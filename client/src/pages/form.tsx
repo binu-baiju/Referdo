@@ -83,15 +83,15 @@ console.log(userIdFromURL);
         // Dev added successfully
         alert('Dev added successfully');
         // Reset form fields
-        setName('');
+        // setName('');
         setEmail('');
-        setProfession('');
-        setDescription('');
-        setPhonenumber('');
-        setResume(null);
-        setTwitterUrl('');
-        setGithubUrl('');
-        setLinkedinUrl('');
+        // setProfession('');
+        // setDescription('');
+        // setPhonenumber('');
+        // setResume(null);
+        // setTwitterUrl('');
+        // setGithubUrl('');
+        // setLinkedinUrl('');
       } else {
         // Error adding dev
         console.error('Error adding dev');
