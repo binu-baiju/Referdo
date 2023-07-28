@@ -5,6 +5,8 @@ const cors = require("cors");
 import authRoutes from "./routes/authRoutes";
 import dashboardRoutes from "./routes/dashboardroutes";
 import formRoutes from "./routes/formRoutes";
+import linkRoutes from "./routes/linkRoutes";
+
 
 // const option = {
 //   socketTimeoutMS: 30000,
@@ -23,6 +25,8 @@ app.use(express.json());
 app.use("/api", authRoutes);
 app.use("/api", dashboardRoutes);
 app.use("/api", formRoutes);
+app.use("/api", linkRoutes);
+
 
 
 

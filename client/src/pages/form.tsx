@@ -72,7 +72,7 @@ console.log(userIdFromURL);
       // headers.append("Content-Type", "application/json");
   
       // Send POST request to the API endpoint
-      const response = await fetch(`http://localhost:5000/api/form/user/647799c70e8c40ca7540f990/dev`, {
+      const response = await fetch(`http://localhost:5000/api/form/user/647799c70e8c40ca7540f990/dev/baiju`, {
         method: 'POST',
         // Don't set the 'Content-Type' header explicitly, let FormData handle it
         // headers: headers,

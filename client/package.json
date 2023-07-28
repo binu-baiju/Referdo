@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.15",
+    "@heroicons/react": "^2.0.18",
     "@leecheuk/react-google-login": "^5.4.1",
     "@react-oauth/google": "^0.11.0",
     "@types/clipboard": "^2.0.7",

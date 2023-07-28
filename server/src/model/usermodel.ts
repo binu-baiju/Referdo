@@ -7,6 +7,9 @@ export interface IUser extends Document {
   name?: string;
   profession?: string;
   devs: string[];
+  Links: string[];
+  [key: string]: any; // Allow dynamic fields
+
   // Schema.Types.ObjectId[];
   // PopulatedDoc<IDev>[];
 }
@@ -18,9 +21,12 @@ const User = new mongoose.Schema(
     name: { type: String },
     profession: { type: String },
     devs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Dev" }],
+    Links: [{ type: String,default: [] }],
+    
   },
   {
     collection: "professional-data",
+    strict: false, // Enable dynamic fields
   }
 );
 

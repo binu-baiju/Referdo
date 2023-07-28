@@ -4,7 +4,7 @@ import User, { IUser } from "../model/usermodel";
 import Devmodel, { IDev } from "../model/devmodel";
 import { Document } from "mongoose";
 
-interface AuthenticatedRequest extends Request {
+export interface AuthenticatedRequest extends Request {
   user?: { email: string };
 }
 
@@ -112,7 +112,7 @@ export const addDevs = async (req: AuthenticatedRequest, res: Response) => {
       linkedinurl: req.body.linkedinurl,
       user: user._id, // Associate the dev with the user
     });
-    console.log(newDev);
+    // console.log(newDev);
 
     // Save the newDev document
     await newDev.save();
@@ -219,7 +219,7 @@ export const getDevs = async (req: AuthenticatedRequest, res: Response) => {
       // Get the first three dev ids from the user object
       const devIds: string[] = user.devs;
       const skip = req.query.skip ? Number(req.query.skip) : 0;
-      const DEFAULT_LIMIT = 7;
+      const DEFAULT_LIMIT = 8;
 
       const devs: IDev[] = await Devmodel.find({ _id: { $in: devIds } }).skip(skip).limit(DEFAULT_LIMIT);
       res.json({ message: "Devs retrieved", devs, status: "ok" });

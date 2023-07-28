@@ -19,6 +19,7 @@ interface AuthenticatedRequest extends Request {
     try {
       const decoded: any = jwt.verify(token, process.env.SECRET_KEY!);
       const email = decoded.email;
+      console.log(token);
       req.user = { email }; // Attach user object to the request for further use
       next();
     } catch (error) {

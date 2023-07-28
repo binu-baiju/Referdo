@@ -84,6 +84,6 @@ const aFunction = (req:any,res:any) => {
 
 
 // router.post("/form/user/:userId/dev",upload.single("resume"), addDevs);
-router.post( '/form/user/:userId/dev',upload.single("resume"),addDev);
+router.post( '/form/user/:userId/dev/:linkName',upload.single("resume"),addDev);
 
 export default router;

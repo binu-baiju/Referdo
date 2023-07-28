@@ -49,7 +49,11 @@ export const addDevs = async (req: CustomRequest, res: Response) => {
         
 
       const userId = req.params.userId;
+      const linkName = req.params.linkName;
+
       console.log(userId);
+      console.log(linkName);
+      
       if (!userId) {
         return res
           .status(401)
@@ -57,7 +61,7 @@ export const addDevs = async (req: CustomRequest, res: Response) => {
       }
   
       const user = await User.findOne({ userId });
-     
+     console.log("USER FOUND!!!!!!!!!!!!!!!")
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
@@ -76,7 +80,7 @@ export const addDevs = async (req: CustomRequest, res: Response) => {
         linkedinurl: req.body.linkedinurl,
         user: user._id, // Associate the dev with the user
       });
-      console.log(newDev);
+      // console.log(newDev);
   
       // Save the newDev document
       await newDev.save();
@@ -98,6 +102,10 @@ export const addDev = async (req: CustomRequest, res: Response) => {
   try {
     
     const userId = req.params.userId;
+    const linkName = req.params.linkName;
+
+      console.log(userId);
+      console.log(linkName);
 
     if (!userId) {
       return res
@@ -129,6 +137,11 @@ export const addDev = async (req: CustomRequest, res: Response) => {
 
     // Push the newDev's ObjectId to the user's 'devs' array
     user.devs.push(newDev._id);
+    
+          // (user as any)[linkName].push(newDev._id);
+          // (user[linkName] as any[]).push(newDev._id);
+          user.set(linkName, [...(user.get(linkName) || []), newDev._id]);
+
     await user.save();
 
     res.json({ message: "Dev added successfully" });
