@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { copyToClipboard } from "../utils/copyToClipboard";
 
 export default function Linksnew() {
   const [linkName, setLinkName] = useState("");
   const [links, setLinks] = useState<string[]>([]);
+  // State to manage the copied status for each link
+  const [copiedStates, setCopiedStates] = useState<boolean[]>([]);
+
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLinkName(event.target.value);
-    
-    
+    setLinkName(event.target.value);    
   };
 
   async function displayAllLinks() {
@@ -68,6 +70,20 @@ export default function Linksnew() {
     }
 
   };
+
+  const handleCopyLinkClick = async(index:number,content:string) => {
+try {
+  await copyToClipboard(content);
+  // const updatedCopiedStates = [...copiedStates];
+  const updatedCopiedStates = links.map((_,i) => (i===index));
+        setCopiedStates(updatedCopiedStates);
+      // updatedCopiedStates[index] = true;
+      // setCopiedStates(updatedCopiedStates);
+} catch (error) {
+  console.log('Copy failed:',error);
+}
+    
+  }
   useEffect(() => {
     displayAllLinks();
     console.log("Links are "+links);
@@ -118,8 +134,11 @@ export default function Linksnew() {
                       <p className="w-5/6 bg-white text-black flex justify-center items-center mx-2 rounded-lg" >
                       {link}
                     </p>
-                    <label tabIndex={0} className="btn btn-sm m-1 ">
-                      Copy
+                    <label tabIndex={0} className="btn btn-sm m-1" onClick={()=>{handleCopyLinkClick(index,`http://localhost:5173/form/user/647799c70e8c40ca7540f990/dev/${link}`)
+                   
+
+                    }} >
+                      {copiedStates[index] ? 'Copied!': 'Copy'}
                     </label>
                 </li>
                   ))}

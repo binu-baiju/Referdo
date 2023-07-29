@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../assets/images/Logo.png";
+import { copyToClipboard } from "../utils/copyToClipboard";
 
 type Dev = {
   email: string;
@@ -27,26 +28,32 @@ interface CardProps {
   onClose?:() => void;
 }
 
-const handleCopyemail=(data:string)=>{
+// export const handleCopyemail=(data:string)=>{
     
-  // const url = `https://dashboard/user/${userId}`;
-  
+//   // const url = `https://dashboard/user/${userId}`;
+//   function isLink(str:string) {
+//     return str.startsWith('http://') || str.startsWith('https://');
+//   }
 
-  navigator.clipboard.writeText(data)
-  .then(() => {
-    if (data.includes('@')) {
-    alert('Email copied to clipboard');
+//   navigator.clipboard.writeText(data)
+//   .then(() => {
+//     if (data.includes('@')) {
+//     alert('Email copied to clipboard');
 
-    }
-    else {
-      alert('Phonenumber copied to clipboard');
+//     }
+//     else if(isLink(data)){
+//     alert('Link copied to clipboard');
 
-    }
-  })
-  .catch((error) => {
-    console.error('Failed to copy URL', error);
-  });
-}
+//     }
+//     else {
+//       alert('Phonenumber copied to clipboard');
+
+//     }
+//   })
+//   .catch((error) => {
+//     console.error('Failed to copy URL', error);
+//   });
+// }
 
 const Carddemo: React.FC<CardProps> = ({ dev,onClose }) => {
  
@@ -95,8 +102,8 @@ const Carddemo: React.FC<CardProps> = ({ dev,onClose }) => {
 
                 <div className="flex flex-col">
                   <div className="flex flex-col w-full items-center gap-1 lg:mt-10">
-                    <button className="btn btn-xs  w-3/4 bg-violet-500 hover:bg-violet-600 border-none text-slate-100 " onClick={()=>handleCopyemail(dev?.email ?? '')} style={{ textTransform: 'lowercase' } }>{dev?.email}</button>
-                    <button className="btn btn-xs  w-3/4 bg-violet-500 hover:bg-violet-600 border-none text-slate-100" onClick={()=>handleCopyemail(dev?.phonenumber ?? '')}>{dev?.phonenumber}</button>
+                    <button className="btn btn-xs  w-3/4 bg-violet-500 hover:bg-violet-600 border-none text-slate-100 " onClick={()=>copyToClipboard(dev?.email ?? '')} style={{ textTransform: 'lowercase' } }>{dev?.email}</button>
+                    <button className="btn btn-xs  w-3/4 bg-violet-500 hover:bg-violet-600 border-none text-slate-100" onClick={()=>copyToClipboard(dev?.phonenumber ?? '')}>{dev?.phonenumber}</button>
                     <button className="btn btn-xs  w-3/4 bg-violet-500 hover:bg-violet-600 border-none text-slate-100">Resume</button>
                     
 
