@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { addDev, sample } from "../controllers/formConroller";
+import { addDev, sample } from "../controllers/formController";
 const router: Router = express.Router();
 
 require("dotenv").config();
@@ -51,7 +51,7 @@ const s3 = new AWS.S3();
 
 const myBucket = process.env.AWS_BUCKET || "";
 
-const upload = multer({
+const uploadResume = multer({
   storage:multerS3({
     s3:s3 as any,
     bucket: myBucket,
@@ -72,18 +72,43 @@ const upload = multer({
   limits: {
     fileSize: 10 * 1024 * 1024 // Specify the maximum file size in bytes (e.g., 10MB)
   }
-})
+});
+
+const photoUpload = multer({
+  storage: multerS3({
+    s3: s3 as any,
+    bucket: myBucket,
+    acl: "public-read",
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    key: function (req, file, cb) {
+      cb(null, "photos/" + file.originalname); // Save the photo with a specific prefix "photos/"
+    }
+  }),
+  fileFilter: function (req, file, cb) {
+    const allowedFileTypes = ["image/jpeg", "image/png", "image/gif"];
+    if (allowedFileTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error("Invalid file type. Only JPEG, PNG, and GIF images are allowed."));
+    }
+  },
+  limits: {
+    fileSize: 10 * 1024 * 1024 // Specify the maximum file size in bytes (e.g., 10MB)
+  }
+});
 
 
-const aFunction = (req:any,res:any) => {
-  console.log(req);
+// const aFunction = (req:any,res:any) => {
+//   console.log(req);
   
   
-  // const s3Client = new S3Client({ region: s3.config.region }); 
-}
+//   // const s3Client = new S3Client({ region: s3.config.region }); 
+// }
 
 
 // router.post("/form/user/:userId/dev",upload.single("resume"), addDevs);
-router.post( '/form/user/:userId/dev/:linkName',upload.single("resume"),addDev);
+router.post( '/form/user/:userId/dev/:linkName',uploadResume.array('resume', 1), photoUpload.array('image', 1),addDev);
 
 export default router;
+
+// [uploadResume.single("resume"), photoUpload.single("image")]

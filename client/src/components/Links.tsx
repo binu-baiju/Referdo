@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { copyToClipboard } from "../utils/copyToClipboard";
+import CopyButton from "./CopyButton";
 
 export default function Linksnew() {
   const [linkName, setLinkName] = useState("");
@@ -129,17 +130,19 @@ try {
             <div className="w-full h-96 overflow-y-auto   ">
               <ul className="flex flex-col gap-2   my-2 items-center  ">
               {links.slice().reverse().map((link,index) => (
-                <li className="w-full flex  justify-center   py-2 rounded-lg " key={link + index}>
+                <li className="w-full flex  justify-center   py-2 rounded-lg pl-2 " key={link + index}>
                 
-                      <p className="w-5/6 bg-white text-black flex justify-center items-center mx-2 rounded-lg" >
+                      {/* <p className="w-5/6 bg-white text-black flex justify-center items-center mx-2 rounded-lg" >
                       {link}
-                    </p>
+                    </p> */}
+                <CopyButton link={link} handleCopyLinkClick={()=>handleCopyLinkClick(index,`http://localhost:5173/form/user/647799c70e8c40ca7540f990/dev/${link}`)} />
+{/* 
                     <label tabIndex={0} className="btn btn-sm m-1" onClick={()=>{handleCopyLinkClick(index,`http://localhost:5173/form/user/647799c70e8c40ca7540f990/dev/${link}`)
+                   }} >
                    
-
-                    }} >
                       {copiedStates[index] ? 'Copied!': 'Copy'}
-                    </label>
+                    </label> */}
+
                 </li>
                   ))}
                 {/* <li className="w-full flex  justify-center   py-2 rounded-lg ">
@@ -153,8 +156,10 @@ try {
               </ul>
             </div>
           </div>
+          
         </div>
       </div>
+      
     </>
   );
 }

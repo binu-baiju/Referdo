@@ -9,30 +9,46 @@ const Form: React.FC = () => {
   const [description, setDescription] = useState('');
   const [phonenumber, setPhonenumber] = useState('');
   const [resume, setResume] = useState<File | null>(null);
+  const [image, setImage] = useState<File | null>(null);
   const [twitterurl, setTwitterUrl] = useState('');
   const [githuburl, setGithubUrl] = useState('');
   const [linkedinurl, setLinkedinUrl] = useState('');
 
   const [userId, setUserId] = useState('');
+  const [linkName, setLinkName] = useState('');
+
 
   useEffect(() => {
     // Get the current URL
     const url = window.location.href;
-    console.log(url);
+   
+    console.log();
     
 
     // Extract the userId from the URL
     const parts = url.split('/');
     const userIdFromURL = parts[5];
-console.log(userIdFromURL);
+    const linkName1 = parts[7];
+    setLinkName(linkName1);
+
+
+
+// console.log(userIdFromURL);
+// console.log(parts);
+console.log(linkName);
+
+
 
     setUserId(userIdFromURL);
+console.log(userId);
+
+
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name || !email || !description || !profession || !phonenumber || !resume || !twitterurl || !githuburl || !linkedinurl) {
+    if (!name || !email || !description || !profession || !phonenumber || !resume || !image || !twitterurl || !githuburl || !linkedinurl) {
       // Display an error message or handle the validation failure in an appropriate way
       console.error('Please fill in all required fields');
       return;
@@ -47,10 +63,13 @@ console.log(userIdFromURL);
     formData.append('twitterurl', twitterurl);
     formData.append('githuburl', githuburl);
     formData.append('linkedinurl', linkedinurl);
+    // formData.append('linkName', linkName);
   
-    if (resume) {
+    if (resume && image ) {
       
         formData.append('resume', resume);
+        formData.append('image', image);
+
   
         // Send the form data to the backend
         submitFormData(formData);
@@ -59,6 +78,8 @@ console.log(userIdFromURL);
     } else {
       // Resume file is not selected
       formData.append('resume', '');
+      formData.append('image', '');
+
   
       // Send the form data to the backend
       submitFormData(formData);
@@ -72,13 +93,14 @@ console.log(userIdFromURL);
       // headers.append("Content-Type", "application/json");
   
       // Send POST request to the API endpoint
-      const response = await fetch(`http://localhost:5000/api/form/user/647799c70e8c40ca7540f990/dev/baiju`, {
+      // 647799c70e8c40ca7540f990
+      const response = await fetch(`http://localhost:5000/api/form/user/${userId}/dev/${linkName}`, {
         method: 'POST',
         // Don't set the 'Content-Type' header explicitly, let FormData handle it
         // headers: headers,
         body: formData
       });
-  
+  console.log(response)
       if (response.ok) {
         // Dev added successfully
         alert('Dev added successfully');
@@ -323,6 +345,36 @@ console.log(userIdFromURL);
                       </div>
                     </div>
                     </div>
+
+                    <div>
+                    <div className="bg-white flex items-center justify-left rounded-lg">
+                      <div className="form-control p-6 w-96 ">
+                        <label className="label bg-gray-200 mb-2 " htmlFor="resume">
+                          <span className="label-text">Image</span>
+                        </label>
+                        <label className="input-group input-group-vertical">
+                          {/* <span>Email</span> */}
+                          <input
+                          id="image"
+                          
+                            type="file"
+                            placeholder="Add file"
+                            accept="image/*"
+                            className="border-b rounded-b-none rounded-none focus:border-gray-500 focus:outline-none text-black bg-white placeholder:pl-1"
+                            style={{ borderRadius: "0" }}
+                               onChange={(e) => {
+                              if (e.target.files && e.target.files.length > 0) {
+                                setImage(e.target.files[0]);
+                              }
+                            }}
+                          
+                          />
+                          {/* onChange={(e) => setResume(e.target.value)} */}
+                        </label>
+                      </div>
+                    </div>
+                    </div> 
+
                     <div>
                       <div className="bg-white flex items-center justify-left rounded-lg">
                         <div className="form-control p-6 w-96 ">

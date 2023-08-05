@@ -9,6 +9,7 @@ export interface IUser extends Document {
   devs: string[];
   Links: string[];
   [key: string]: any; // Allow dynamic fields
+  // [linkName: any]: string[] | undefined; // Allow dynamic fields
 
   // Schema.Types.ObjectId[];
   // PopulatedDoc<IDev>[];

@@ -125,6 +125,7 @@ export const addDev = async (req: CustomRequest, res: Response) => {
       description: req.body.description,
       phonenumber: req.body.phonenumber,
       resume:req.file?.location,
+      image:req.file?.location,
       twitterurl: req.body.twitterurl,
       githuburl: req.body.githuburl,
       linkedinurl: req.body.linkedinurl,
@@ -137,6 +138,10 @@ export const addDev = async (req: CustomRequest, res: Response) => {
 
     // Push the newDev's ObjectId to the user's 'devs' array
     user.devs.push(newDev._id);
+  
+
+   
+
     
           // (user as any)[linkName].push(newDev._id);
           // (user[linkName] as any[]).push(newDev._id);
