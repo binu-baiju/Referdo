@@ -15,6 +15,7 @@ import Sampleform from "./pages/sample_form";
 import Card from "./pages/Card";
 import Payment from "./pages/Payment";
 import Dashboardnew from "./pages/Dashboardnew";
+import HRView from "./pages/HRView";
 
 
 export default function App() {
@@ -27,6 +28,8 @@ export default function App() {
 
         <Route  path="/login/*" element={<Login />} />
         <Route  path="/form/user/:userId/dev/:linkName" element={<Form />} />
+        <Route  path="/hrview/:userId" element={<HRView />} />
+
         {/* <Route  path="/dashboard/cardmodal" element={<Card/>} /> */}
         <Route  path="/dashboard/editprofile" element={<EditProfile />} />
         <Route  path="/sampleform" element={<Sampleform />} />

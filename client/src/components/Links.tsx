@@ -92,7 +92,7 @@ try {
 
   return (
     <>
-      <div className=" bg-slate-200 flex justify-center  lg:w-1/4 h-1/2 w-11/12  lg:mr-5 lg:mb-0 mb-64 lg:h-full rounded-lg">
+      <div className=" bg-slate-200 flex justify-center  lg:w-1/4    w-11/12  lg:mr-5 lg:mb-0 mb-96 lg:h-full rounded-lg">
         <div className="w-full flex flex-col items-center  m-2 border-[2px] border-dashed border-gray-400">
           <div>
             <h2 className="text-black p-2 underline font-bold">Links</h2>
@@ -104,7 +104,7 @@ try {
               </label>
               <ul
                 tabIndex={0}
-                className="dropdown-content mt-9  menu p-2 shadow bg-base-100 rounded-box w-full h-36"
+                className="dropdown-content mt-9  menu p-2 shadow bg-base-100 rounded-box w-full h-36 "
               >
                 <li className="  flex justify-center">
                   <form action="" onSubmit={handleSubmit}>
@@ -127,8 +127,8 @@ try {
                 </li>
               </ul>
             </div>
-            <div className="w-full h-96 overflow-y-auto   ">
-              <ul className="flex flex-col gap-2   my-2 items-center  ">
+            <div className="w-full h-96 overflow-y-auto mt-4   ">
+              <ul className="flex flex-col gap-2    items-center   ">
               {links.slice().reverse().map((link,index) => (
                 <li className="w-full flex  justify-center   py-2 rounded-lg pl-2 " key={link + index}>
                 
@@ -136,7 +136,7 @@ try {
                       {link}
                     </p> */}
                 <CopyButton link={link} handleCopyLinkClick={()=>handleCopyLinkClick(index,`http://localhost:5173/form/user/647799c70e8c40ca7540f990/dev/${link}`)} />
-{/* 
+              {/* 
                     <label tabIndex={0} className="btn btn-sm m-1" onClick={()=>{handleCopyLinkClick(index,`http://localhost:5173/form/user/647799c70e8c40ca7540f990/dev/${link}`)
                    }} >
                    

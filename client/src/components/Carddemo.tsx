@@ -64,7 +64,7 @@ const Carddemo: React.FC<CardProps> = ({ dev,onClose }) => {
       <>
         {/* <input type="checkbox" id="my-modal-4" className="modal-toggle" />
         <label htmlFor="my-modal-4" className="modal cursor-pointer"> */}
-          <div key={dev._id} className="max-w-sm w-52 h-full lg:h-full md:w-42  lg:w-52  flex-shrink-0 flex-grow-0 rounded-2xl overflow-hidden shadow-lg bg-white font-poppins">
+          <div key={dev._id} className="max-w-sm w-48 h-full lg:h-full md:w-42  lg:w-52  flex-shrink-0 flex-grow-0 rounded-2xl overflow-hidden shadow-lg bg-white font-poppins">
             <div className="flex flex-col gap-2 ">
                 <div className="flex flex-col gap-0">
                 <div className=" flex justify-end items-center">
@@ -102,16 +102,16 @@ const Carddemo: React.FC<CardProps> = ({ dev,onClose }) => {
 
                 <div className="flex flex-col">
                   <div className="flex flex-col w-full items-center gap-1 lg:mt-10">
-                    <button className="btn btn-xs  w-3/4 bg-violet-500 hover:bg-violet-600 border-none text-slate-100 " onClick={()=>copyToClipboard(dev?.email ?? '')} style={{ textTransform: 'lowercase' } }>{dev?.email}</button>
-                    <button className="btn btn-xs  w-3/4 bg-violet-500 hover:bg-violet-600 border-none text-slate-100" onClick={()=>copyToClipboard(dev?.phonenumber ?? '')}>{dev?.phonenumber}</button>
-                    <button className="btn btn-xs  w-3/4 bg-violet-500 hover:bg-violet-600 border-none text-slate-100">Resume</button>
+                    <button className="btn btn-xs  w-3/4 bg-black hover:bg-blue-900 border-none text-slate-100 " onClick={()=>copyToClipboard(dev?.email ?? '')} style={{ textTransform: 'lowercase' } }>{dev?.email}</button>
+                    <button className="btn btn-xs  w-3/4 bg-black hover:bg-blue-900 border-none text-slate-100" onClick={()=>copyToClipboard(dev?.phonenumber ?? '')}>{dev?.phonenumber}</button>
+                    <button className="btn btn-xs  w-3/4 bg-black hover:bg-blue-900 border-none text-slate-100">Resume</button>
                     
 
                     
                    
                   </div>
 
-                  <div className="flex  mt-1 lg:mt-2    justify-center gap-6  items-end  w-40 px-2 lg:mx-5   ">
+                  <div className="flex  mt-1 lg:mt-2     justify-center gap-6  items-end  w-40 mx-4 lg:px-2 lg:mx-5   ">
                     <div className="w=1/3"> <a
                       href={dev?.twitterurl}
                       target="_blank"

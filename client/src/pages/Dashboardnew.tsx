@@ -9,7 +9,7 @@ import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import Linksnew from "../components/Links";
 import ShowModal from "../components/ShareModal";
-
+import './Dashboardnew.css';
 
 const user1 = {
   name: "Tom Cook",
@@ -18,12 +18,13 @@ const user1 = {
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-  { name: "Reports", href: "#", current: false },
+  { name: "Edit Profile", href: "#", current: true,htmlFor: "my-modal-3",logoutfunction: false },
+  { name: "Sign out", href: "#",current: true, logoutfunction: true,htmlFor: "" },
+ 
+  
 ];
+
+
 const userNavigation = [
   {
     name: "Edit Profile",
@@ -335,23 +336,50 @@ export default function Dashboardnew() {
               <Disclosure.Panel className="md:hidden">
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                   {navigation.map((item) => (
-                    <Disclosure.Button
+                    <label
                       key={item.name}
-                      as="a"
-                      href={item.href}
+                      onClick={
+                        item.logoutfunction
+                          ? handleLogout
+                          : undefined
+                      }
+                      htmlFor={item.htmlFor}
+
+                      // as="a"
+                      // href={item.href}
+                      
+                      
                       className={classNames(
                         item.current
-                          ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          ? "bg-blue-900 text-white hover:bg-blue-700"
+                          : "text-white hover:bg-blue-700 hover:text-white",
                         "block rounded-md px-3 py-2 text-base font-medium"
                       )}
                       aria-current={item.current ? "page" : undefined}
                     >
+                      
                       {item.name}
-                    </Disclosure.Button>
+                      
+                     
+                    </label>
+                  //   <Disclosure.Button
+                  //   key={item.name}
+                  //   as="a"
+                  //   href={item.href}
+                    
+                  //   className={classNames(
+                  //     item.current
+                  //       ? "bg-gray-900 text-white"
+                  //       : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                  //     "block rounded-md px-3 py-2 text-base font-medium"
+                  //   )}
+                  //   aria-current={item.current ? "page" : undefined}
+                  // >
+                  //   {item.name}
+                  // </Disclosure.Button>
                   ))}
                 </div>
-                <div className="border-t border-gray-700 pb-3 pt-4">
+                <div className="border-t border-gray-700 pb-3 pt-1">
                   <div className="flex items-center px-5">
                     <div className="flex-shrink-0">
                       <img
@@ -362,19 +390,19 @@ export default function Dashboardnew() {
                     </div>
                     <div className="ml-3">
                       <div className="text-base font-medium leading-none text-white">
-                        {user1.name}
+                      {user?.name}
                       </div>
                       <div className="text-sm font-medium leading-none text-gray-400">
-                        {user1.email}
+                        
                       </div>
                     </div>
-                    <button
+                    {/* <button
                       type="button"
                       className="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                     >
                       <span className="sr-only">View notifications</span>
                       <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
+                    </button> */}
                   </div>
                   <div className="mt-3 space-y-1 px-2">
                     {userNavigation.map((item) => (
@@ -407,8 +435,8 @@ export default function Dashboardnew() {
               {/* jknkjbjhbhbhjbhvgybhgvhvgh */}
             </div>
           </main>
-          <div className="flex flex-1 flex-col justify-center items-center lg:flex-row lg:justify-center gap-9   absolute top-24 left-1/2 transform -translate-x-1/2 lg:h-3/5 h-full   w-full  ">
-            <div className=" bg-slate-100 border flex justify-center  h-3/4   lg:w-full  w-full lg:ml-5  lg:h-full rounded-lg">
+          <div className="flex flex-1 flex-col justify-center items-center lg:flex-row lg:justify-center gap-9   absolute top-96 lg:top-24 mt-24 lg:mt-0 left-1/2 transform -translate-x-1/2 lg:h-3/5 h-full    w-full  ">
+            <div className=" bg-slate-100 border flex justify-center  h-3/4    lg:w-full  w-full lg:ml-5  lg:h-full rounded-lg">
               <div className="w-full flex flex-col justify-between  items-center  m-2 border-[2px] border-dashed border-gray-400">
                 <h2 className="text-black p-2 underline font-bold">
                   Referred Devs
@@ -436,7 +464,10 @@ export default function Dashboardnew() {
                   <div className=" w-full h-full   flex lg:flex-wrap  overflow-y-auto     items-center lg:items-start text-black ">
                     <div
                       onScroll={handleScroll}
-                      className="flex  flex-wrap  lg:h-96 overflow-y-auto  w-full md:justify-start lg:justify-start   lg:items-start  h-full lg:gap-3 gap-3 lg:px-3 px-6   py-2"
+                      className="flex  flex-wrap   lg:h-96 overflow-y-auto  
+                      w-full    sm:justify-center md:justify-center lg:justify-start 
+                      lg:items-start  h-full gap-3 sm:gap-2 md:gap-1 lg:gap-1 px-2 
+                      md:px-0 lg:px-3 py-2 "
                     >
                       {devs.map((dev) => {
                         if (dev) {
@@ -473,6 +504,7 @@ export default function Dashboardnew() {
             </div>
 
             <Linksnew />
+            <div className="mb-56 lg:mb-0"></div>
           </div>
         </div>
       </div>

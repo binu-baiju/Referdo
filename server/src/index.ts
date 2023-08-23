@@ -6,6 +6,7 @@ import authRoutes from "./routes/authRoutes";
 import dashboardRoutes from "./routes/dashboardroutes";
 import formRoutes from "./routes/formRoutes";
 import linkRoutes from "./routes/linkRoutes";
+import hrviewRoutes from "./routes/hrviewRoutes";
 
 
 // const option = {
@@ -26,6 +27,8 @@ app.use("/api", authRoutes);
 app.use("/api", dashboardRoutes);
 app.use("/api", formRoutes);
 app.use("/api", linkRoutes);
+app.use("/api", hrviewRoutes);
+
 
 
 
